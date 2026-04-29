@@ -25,6 +25,12 @@ def get_ai_insight(rate, total):
     if rate > 10:
        return " High-risk profile. While returns are high, prepare for potential market volatility." 
     
+    elif total < 50000:
+       return " Conservative growth. Consider slightly increasing monthly contributions to hit milestones sooner."
+    
+    else: 
+        return " Balanced approach. This path shows consistent wealth accumulation."
+    
     
 
 
