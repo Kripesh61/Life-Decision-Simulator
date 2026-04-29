@@ -9,4 +9,5 @@ def calculate_wealth(monthly_investment, annual_rate, years):
     labels = []
     current_balance = 0
 
-    
+    for m in range(1, months + 1):
+        
