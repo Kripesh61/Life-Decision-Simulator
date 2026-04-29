@@ -18,4 +18,9 @@ def calculate_wealth(monthly_investment, annual_rate, years):
             labels.append(f"Year {m//12}")
 
 
+    return labels, balances
+
+
+
+
 
