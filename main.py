@@ -12,4 +12,4 @@ def get_data_path(filename: str) -> str:
 
 
 st.set_page_config(page_title="Life Decision Simulator", layout="wide")
-
+st.title("Life Decision Simulator")
