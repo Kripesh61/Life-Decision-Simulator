@@ -10,4 +10,9 @@ def calculate_wealth(monthly_investment, annual_rate, years):
     current_balance = 0
 
     for m in range(1, months + 1):
+
+        current_balance = (current_balance + monthly_investment) * (1 + monthly_rate)
+
         
+
+
