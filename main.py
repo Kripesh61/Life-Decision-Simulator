@@ -10,3 +10,6 @@ def get_data_path(filename: str) -> str:
 
     return os.path.join(APP_PATH, "data", filename)
 
+
+st.set_page_config(page_title="Life Decision Simulator", layout="wide")
+
