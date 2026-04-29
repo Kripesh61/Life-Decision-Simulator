@@ -20,6 +20,13 @@ def calculate_wealth(monthly_investment, annual_rate, years):
 
     return labels, balances
 
+def get_ai_insight(rate, total):
+
+    if rate > 10:
+       return " High-risk profile. While returns are high, prepare for potential market volatility." 
+    
+    
+
 
 
 
