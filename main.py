@@ -35,3 +35,5 @@ with col1:
      final_total = balances[-1] if balances else 0
      st.metric("Estimated Final Balance", f"${final_total:,.2f}")
      st.info(f"**AI Insight:** \n\n {get_ai_insight(rate, final_total)}")
+
+     
