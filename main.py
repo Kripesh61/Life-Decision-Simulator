@@ -46,4 +46,8 @@ if st.button("Save This Scenario"):
 
     new_entry = {"Scenario": name, "Monthly": monthly, "Total": final_total}
 
-    
+    # Load and Append
+    history = []
+    if os.path.exists(data_file):
+        with open(data_file, "r") as f:
+            history = json.load(f)
