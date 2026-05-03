@@ -25,3 +25,8 @@ rate = st.sidebar.slider("Expected Return (%)", 1, 15, 7)
 labels, balances = calculate_wealth(monthly, rate, years)
 
 col1, col2 = st.columns([2, 1])
+
+with col1:
+    st.subheader(f"Projection: {name}")
+    chart_data = pd.DataFrame({"Wealth": balances}, index=labels)
+    st.line_chart(chart_data)
