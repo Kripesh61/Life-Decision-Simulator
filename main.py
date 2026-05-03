@@ -16,3 +16,10 @@ st.title("Life Decision Simulator")
 
 # --- SIDEBAR INPUTS ---
 st.sidebar.header("Scenario Settings")
+
+name = st.sidebar.text_input("Scenario Name", "New Car vs Savings")
+monthly = st.sidebar.number_input("Monthly Contribution ($)", 0, 10000, 500)
+years = st.sidebar.slider("Time Horizon (Years)", 1, 40, 10)
+rate = st.sidebar.slider("Expected Return (%)", 1, 15, 7)
+
+
