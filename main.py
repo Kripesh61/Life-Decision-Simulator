@@ -36,4 +36,8 @@ with col1:
      st.metric("Estimated Final Balance", f"${final_total:,.2f}")
      st.info(f"**AI Insight:** \n\n {get_ai_insight(rate, final_total)}")
 
-     
+     # --- SAVE/LOAD SECTION ---
+st.divider()
+st.header("💾 Scenario Manager")
+
+
