@@ -52,6 +52,10 @@ if st.button("Save This Scenario"):
         with open(data_file, "r") as f:
             history = json.load(f)
 
+    history.append(new_entry)
     
+    with open(data_file, "w") as f:
+        json.dump(history, f, indent=4)
+    st.success("Scenario saved successfully!")
 
 
