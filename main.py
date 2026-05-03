@@ -45,3 +45,5 @@ if st.button("Save This Scenario"):
     os.makedirs(os.path.dirname(data_file), exist_ok=True)
 
     new_entry = {"Scenario": name, "Monthly": monthly, "Total": final_total}
+
+    
