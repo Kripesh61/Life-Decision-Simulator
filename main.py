@@ -31,4 +31,7 @@ with col1:
     chart_data = pd.DataFrame({"Wealth": balances}, index=labels)
     st.line_chart(chart_data)
 
-    
+    with col2:
+     final_total = balances[-1] if balances else 0
+     st.metric("Estimated Final Balance", f"${final_total:,.2f}")
+     st.info(f"**AI Insight:** \n\n {get_ai_insight(rate, final_total)}")
