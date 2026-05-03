@@ -59,7 +59,10 @@ if st.button("Save This Scenario"):
     st.success("Scenario saved successfully!")
 
 
-
+# Load Table
+if os.path.exists(get_data_path("scenarios.json")):
+    with open(get_data_path("scenarios.json"), "r") as f:
+        st.table(pd.DataFrame(json.load(f)))
 
 
 
