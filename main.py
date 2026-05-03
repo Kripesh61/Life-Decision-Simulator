@@ -24,3 +24,4 @@ rate = st.sidebar.slider("Expected Return (%)", 1, 15, 7)
 
 labels, balances = calculate_wealth(monthly, rate, years)
 
+col1, col2 = st.columns([2, 1])
