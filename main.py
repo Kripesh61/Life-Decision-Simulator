@@ -30,3 +30,5 @@ with col1:
     st.subheader(f"Projection: {name}")
     chart_data = pd.DataFrame({"Wealth": balances}, index=labels)
     st.line_chart(chart_data)
+
+    
