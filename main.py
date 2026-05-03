@@ -44,4 +44,4 @@ if st.button("Save This Scenario"):
     data_file = get_data_path("scenarios.json")
     os.makedirs(os.path.dirname(data_file), exist_ok=True)
 
-    
+    new_entry = {"Scenario": name, "Monthly": monthly, "Total": final_total}
