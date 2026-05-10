@@ -16,7 +16,7 @@ st.title("Life Decision Simulator")
 
 # --- SIDEBAR INPUTS ---
 st.sidebar.header("Scenario Settings")
-
+#Life-Decision-Simulator
 name = st.sidebar.text_input("Scenario Name", "New Car vs Savings")
 monthly = st.sidebar.number_input("Monthly Contribution ($)", 0, 10000, 500)
 years = st.sidebar.slider("Time Horizon (Years)", 1, 40, 10)
