@@ -37,32 +37,7 @@ with col1:
      st.info(f"**AI Insight:** \n\n {get_ai_insight(rate, final_total)}")
 
      # --- SAVE/LOAD SECTION ---
-st.divider()
-st.header("💾 Scenario Manager")
 
-if st.button("Save This Scenario"):
-    data_file = get_data_path("scenarios.json")
-    os.makedirs(os.path.dirname(data_file), exist_ok=True)
-
-    new_entry = {"Scenario": name, "Monthly": monthly, "Total": final_total}
-
-    # Load and Append
-    history = []
-    if os.path.exists(data_file):
-        with open(data_file, "r") as f:
-            history = json.load(f)
-
-    history.append(new_entry)
-    
-    with open(data_file, "w") as f:
-        json.dump(history, f, indent=4)
-    st.success("Scenario saved successfully!")
-
-
-# Load Table
-if os.path.exists(get_data_path("scenarios.json")):
-    with open(get_data_path("scenarios.json"), "r") as f:
-        st.table(pd.DataFrame(json.load(f)))
 
 
 
