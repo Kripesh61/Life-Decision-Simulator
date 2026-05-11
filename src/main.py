@@ -40,7 +40,7 @@ with col1:
 st.divider()
 st.header("Scenario Manager")
 
-
+data_file = get_data_path("scenarios.json")
 
     # Load and Append
     history = []
