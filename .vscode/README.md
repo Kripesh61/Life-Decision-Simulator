@@ -1,2 +1,0 @@
-# Life-Decision-Simulator
-test
