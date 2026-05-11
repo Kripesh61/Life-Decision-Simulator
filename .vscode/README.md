@@ -71,7 +71,8 @@ Auto-Commit: GitDoc committed every code change to GitHub, documenting the "evol
 Transition: Stable features were moved from src/ to dist/ once verified as working.
 
 
- AI & Open Source Disclosure
+AI & Open Source Disclosure
+
 AI Use: AI was used exclusively for generating project documentation and this README file. The application logic, financial math, and Streamlit integration were developed manually by the author.
 
 Open Source: Layout patterns for Streamlit columns and metrics were referenced from the official Streamlit documentation.
