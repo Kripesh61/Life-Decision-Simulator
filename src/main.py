@@ -64,6 +64,15 @@ if history:
 
 
     st.table(pd.DataFrame(history))
+
+# 4. ADD DELETE 
+    
+    if st.button("🗑️ Clear All Saved Scenarios"):
+        os.remove(data_file)
+        st.success("History cleared!")
+        st.rerun()
+else:
+    st.info("No saved scenarios yet. Use the sidebar to save your first one!")
         
 
 
