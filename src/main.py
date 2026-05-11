@@ -2,49 +2,43 @@ import streamlit as st
 import pandas as pd
 import json
 import os
-from logic import calculate_wealth, get_spending_verdict, get_ai_insight
+from logic import calculate_wealth, get_ai_insight, get_spending_verdict
 
-
-# MANDATORY: Ensures the app works on the instructor's computer
-
+# Mandatory Path Logic
 APP_PATH = os.path.dirname(os.path.abspath(__file__))
-
 def get_data_path(filename: str) -> str:
     return os.path.join(APP_PATH, "data", filename)
 
 st.set_page_config(page_title="Life Decision Simulator Pro", layout="wide")
-st.title("💰 Life Decision & Spending Simulator")
+st.title(" Life Decision & Spending Simulator")
 
-# --- SIDEBAR: DYNAMIC PROFILE INPUTS ---
-
-st.sidebar.header(" Your Financial Profile")
+# --- SIDEBAR: DYNAMIC FINANCIAL PROFILE ---
+st.sidebar.header(" Your Profile")
 salary = st.sidebar.number_input("Annual Salary ($)", 0, 1000000, 60000)
 tax_rate = st.sidebar.slider("Estimated Tax Rate (%)", 0, 50, 25)
 after_tax_monthly = (salary * (1 - tax_rate/100)) / 12
 
 st.sidebar.divider()
-st.sidebar.header(" Retirement Strategy")
+st.sidebar.header(" Strategy")
 name = st.sidebar.text_input("Scenario Name", "Retirement Goal")
 save_pct = st.sidebar.slider("Percent of Income to Save (%)", 0, 100, 20)
 monthly_val = after_tax_monthly * (save_pct / 100)
 years = st.sidebar.slider("Growth Years", 1, 40, 20)
-rate = st.sidebar.slider("Expected Annual Return (%)", 1, 15, 7)
+rate = st.sidebar.slider("Annual Return (%)", 1, 15, 7)
 
 st.sidebar.divider()
-st.sidebar.header("⚡ One-Time Events")
+st.sidebar.header("⚡ Sudden Events")
 windfall = st.sidebar.number_input("Sudden Income (Bonus/Gift) ($)", 0, 1000000, 0)
-expense = st.sidebar.number_input("Sudden Expense (Emergency) ($)", 0, 1000000, 0)
+expense = st.sidebar.number_input("Emergency Expense ($)", 0, 1000000, 0)
 initial_capital = windfall - expense
 
 # --- CORE CALCULATIONS ---
-
 labels, balances = calculate_wealth(monthly_val, rate, years, initial_capital)
 final_total = balances[-1] if balances else 0
 
-# --- NEW FEATURE: THE SPENDING ADVISOR ---
-
+# --- SPENDING ADVISOR ---
 st.header("🛒 The Spending Advisor")
-item = st.text_input("What do you want to buy?", "A New Car")
+item = st.text_input("What are you thinking of buying?", "A New Car")
 cost = st.number_input(f"Cost of {item} ($)", 0, 1000000, 0)
 
 if cost > 0:
@@ -64,14 +58,13 @@ with col1:
     st.subheader(f"Projection: {name}")
     chart_df = pd.DataFrame({"Current Path": balances}, index=labels)
     
-    # ADVANCED FEATURE: Visual Comparison Overlay
+    # Overlay Comparison
     if history:
         to_compare = st.multiselect("Overlay Saved Scenarios to Compare:", [h['Scenario'] for h in history])
         for h in history:
             if h['Scenario'] in to_compare:
-                # Re-calculate to match current graph timeframe
-                _, h_balances = calculate_wealth(h['Monthly'], h['Rate'], h['Years'], h.get('Initial', 0))
-                chart_df[h['Scenario']] = h_balances
+                _, h_bal = calculate_wealth(h.get('Monthly', 500), h.get('Rate', 7), h.get('Years', 10), h.get('Initial', 0))
+                chart_df[h['Scenario']] = h_bal
     
     st.line_chart(chart_df)
 
@@ -80,10 +73,9 @@ with col2:
     st.write(f"Monthly Savings: **${monthly_val:,.2f}**")
     st.info(f"**AI Insight:** {get_ai_insight(rate, final_total)}")
 
-# --- SCENARIO MANAGER: SAVE / LOAD / DELETE ---
-st.header("💾 Scenario Manager")
-
-if st.button("Save This Scenario"):
+# --- SCENARIO MANAGER: SAVE / DELETE ---
+st.header(" Scenario Manager")
+if st.button("Save Current Scenario"):
     os.makedirs(os.path.dirname(data_file), exist_ok=True)
     history.append({
         "Scenario": name, "Monthly": monthly_val, "Years": years, 
@@ -91,15 +83,14 @@ if st.button("Save This Scenario"):
     })
     with open(data_file, "w") as f:
         json.dump(history, f, indent=4)
-    st.success(f"Scenario '{name}' saved!")
     st.rerun()
 
 if history:
-    df_h = pd.DataFrame(history)
-    st.table(df_h[["Scenario", "Total", "Monthly"]])
+    df_history = pd.DataFrame(history)
+    st.table(df_history[["Scenario", "Total", "Monthly"]])
     
-    # DELETE FEATURE: Mandatory for "Read & Write" requirement
-    target = st.selectbox("Select Scenario to Delete:", df_h["Scenario"].unique())
+    # Delete Feature
+    target = st.selectbox("Select Scenario to Delete:", df_history["Scenario"].unique())
     if st.button("🗑️ Delete Selected"):
         history = [h for h in history if h["Scenario"] != target]
         with open(data_file, "w") as f:
