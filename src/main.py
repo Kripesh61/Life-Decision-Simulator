@@ -63,9 +63,7 @@ if history:
         st.bar_chart(data=compare_df, x="Scenario", y="Total") 
 
 
-# Load Table
-if os.path.exists(get_data_path("scenarios.json")):
-    with open(get_data_path("scenarios.json"), "r") as f:
+
         
 
 
