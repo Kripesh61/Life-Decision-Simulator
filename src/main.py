@@ -48,8 +48,19 @@ if os.path.exists(data_file):
     with open(data_file, "r") as f:
         history = json.load(f) 
 
+
+# 2. SAVE Logic
+if st.button("Save Current Scenario"):
+    os.makedirs(os.path.dirname(data_file), exist_ok=True)
+    new_entry = {"Scenario": name, "Monthly": monthly, "Total": final_total}
+    history.append(new_entry)
+    with open(data_file, "w") as f:
+        json.dump(history, f, indent=4)
+    st.success(f"Scenario '{name}' saved!")
+    st.rerun()
+
 if history:
-    # 2. ADD COMPARISON (The "Unique/Complex" requirement)
+    # 3. ADD COMPARISON
    
     st.subheader("Compare Scenarios")
     to_compare = st.multiselect("Select scenarios to compare side-by-side:", options=[h["Scenario"] for h in history])
