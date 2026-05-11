@@ -55,9 +55,12 @@ if history:
     to_compare = st.multiselect("Select scenarios to compare side-by-side:", options=[h["Scenario"] for h in history])
     
     
-    with open(data_file, "w") as f:
-        json.dump(history, f, indent=4)
-    st.success("Scenario saved successfully!")
+    if to_compare:
+        
+        # Filter data for chart
+        
+        compare_df = pd.DataFrame([h for h in history if h["Scenario"] in to_compare])
+        st.bar_chart(data=compare_df, x="Scenario", y="Total") 
 
 
 # Load Table
