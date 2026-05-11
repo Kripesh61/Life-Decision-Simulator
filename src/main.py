@@ -48,6 +48,11 @@ if os.path.exists(data_file):
     with open(data_file, "r") as f:
         history = json.load(f) 
 
+if history:
+    # 2. ADD COMPARISON (The "Unique/Complex" requirement)
+   
+    st.subheader("Compare Scenarios")
+    to_compare = st.multiselect("Select scenarios to compare side-by-side:", options=[h["Scenario"] for h in history])
     
     
     with open(data_file, "w") as f:
