@@ -67,7 +67,7 @@ if history:
 
 # 4. ADD DELETE 
     
-    if st.button("🗑️ Clear All Saved Scenarios"):
+    if st.button(" Clear All Saved Scenarios"):
         os.remove(data_file)
         st.success("History cleared!")
         st.rerun()
