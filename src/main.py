@@ -38,53 +38,31 @@ with col1:
 
      # --- SAVE/LOAD SECTION ---
 st.divider()
-st.header("Scenario Manager")
+st.header("💾 Scenario Manager")
 
-data_file = get_data_path("scenarios.json")
-
-# 1. Load data safely
-history = []
-if os.path.exists(data_file):
-    with open(data_file, "r") as f:
-        history = json.load(f) 
-
-
-# 2. SAVE Logic
-if st.button("Save Current Scenario"):
+if st.button("Save This Scenario"):
+    data_file = get_data_path("scenarios.json")
     os.makedirs(os.path.dirname(data_file), exist_ok=True)
+
     new_entry = {"Scenario": name, "Monthly": monthly, "Total": final_total}
+
+    # Load and Append
+    history = []
+    if os.path.exists(data_file):
+        with open(data_file, "r") as f:
+            history = json.load(f)
+
     history.append(new_entry)
+    
     with open(data_file, "w") as f:
         json.dump(history, f, indent=4)
-    st.success(f"Scenario '{name}' saved!")
-    st.rerun()
-
-if history:
-    # 3. ADD COMPARISON
-   
-    st.subheader("Compare Scenarios")
-    to_compare = st.multiselect("Select scenarios to compare side-by-side:", options=[h["Scenario"] for h in history])
-    
-    
-    if to_compare:
-        
-        # Filter data for chart
-        
-        compare_df = pd.DataFrame([h for h in history if h["Scenario"] in to_compare])
-        st.bar_chart(data=compare_df, x="Scenario", y="Total") 
+    st.success("Scenario saved successfully!")
 
 
-    st.table(pd.DataFrame(history))
-
-# 4. ADD DELETE 
-    
-    if st.button(" Clear All Saved Scenarios"):
-        os.remove(data_file)
-        st.success("History cleared!")
-        st.rerun()
-else:
-    st.info("No saved scenarios yet. Use the sidebar to save your first one!")
-        
+# Load Table
+if os.path.exists(get_data_path("scenarios.json")):
+    with open(get_data_path("scenarios.json"), "r") as f:
+        st.table(pd.DataFrame(json.load(f)))
 
 
 
