@@ -38,7 +38,7 @@ with col1:
 
      # --- SAVE/LOAD SECTION ---
 st.divider()
-st.header("💾 Scenario Manager")
+st.header("Scenario Manager")
 
 if st.button("Save This Scenario"):
     data_file = get_data_path("scenarios.json")
