@@ -63,7 +63,7 @@ if history:
         st.bar_chart(data=compare_df, x="Scenario", y="Total") 
 
 
-
+    st.table(pd.DataFrame(history))
         
 
 
