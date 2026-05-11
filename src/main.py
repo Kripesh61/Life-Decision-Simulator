@@ -42,13 +42,13 @@ st.header("Scenario Manager")
 
 data_file = get_data_path("scenarios.json")
 
-    # Load and Append
-    history = []
-    if os.path.exists(data_file):
-        with open(data_file, "r") as f:
-            history = json.load(f)
+# 1. Load data safely
+history = []
+if os.path.exists(data_file):
+    with open(data_file, "r") as f:
+        history = json.load(f) 
 
-    history.append(new_entry)
+    
     
     with open(data_file, "w") as f:
         json.dump(history, f, indent=4)
