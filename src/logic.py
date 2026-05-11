@@ -25,16 +25,17 @@ def get_spending_verdict(item_cost, project_total, years, rate):
     impact_pct = (item_cost / project_total) * 100 if project_total > 0 else 100
 
     if impact_pct > 10:
-        return f" **Verdict: DO NOT BUY.** This costs {impact_pct:.1f}% of your wealth. That ${item_cost:,} would have been **${future_loss:,.2f}** at retirement."
+        return f" **Verdict: DO NOT BUY.** This costs {impact_pct:.1f}% of your projected wealth. That ${item_cost:,} would have been **${future_loss:,.2f}** at retirement."
     elif impact_pct > 3:
         return f" **Verdict: CAUTION.** This is {impact_pct:.1f}% of your goal. You lose **${future_loss:,.2f}** in potential growth."
     else:
         return f" **Verdict: SAFE.** This purchase has a minor impact on your future wealth."
 
 def get_ai_insight(rate, total):
+    """Provides automated feedback based on simulation results."""
     if rate > 10:
-        return " High-risk profile. Prepare for market volatility."
+       return " High-risk profile. Prepare for potential market volatility." 
     elif total < 50000:
-        return " Growth is slow. Consider increasing contributions."
-    else:
-        return "⚖️ Balanced approach. Consistent accumulation detected."
+       return " Conservative growth. Consider increasing monthly contributions."
+    else: 
+        return " Balanced approach. Consistent wealth accumulation detected."
