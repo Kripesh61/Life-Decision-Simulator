@@ -1,0 +1,10 @@
+[
+    {
+        "Scenario": "Retirement Goal",
+        "Monthly": 750.0,
+        "Years": 20,
+        "Rate": 7,
+        "Initial": 0,
+        "Total": 392974.05
+    }
+]
